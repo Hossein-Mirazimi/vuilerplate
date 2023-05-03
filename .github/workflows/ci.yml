@@ -17,19 +17,23 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache Pnpm
-        uses: actions/cache@v3
-        with:
-          key: npm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
-          path: |
-            '~/.pnpm/store'
-            '~/.npm'
-
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
           run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install Depenecies
         run: pnpm i
@@ -48,19 +52,23 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache Pnpm
-        uses: actions/cache@v3
-        with:
-          key: npm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
-          path: |
-            '~/.pnpm/store'
-            '~/.npm'
-
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7
           run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install Depenecies
         run: pnpm i
@@ -75,18 +83,23 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
 
-      - name: Cache Pnpm
-        uses: actions/cache@v3
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v2
         with:
-          key: npm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
-          path: |
-            '~/.pnpm/store'
-            '~/.npm'
+          version: 7
+          run_install: false
 
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
         with:
-          node-version: 18
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
@@ -120,6 +133,19 @@ jobs:
         with:
           version: 7
           run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+
 
       - name: Install Depenecies
         run: pnpm i
