@@ -17,7 +17,6 @@ const { t } = useI18n()
     <AlibabaLogo class="w-[15rem]" />
     <img class="w-[12rem]" alt="Vue logo" src="../assets/logo.png">
   </div>
-  <HelloWorld />
   <NewJsxFile />
 </template>
 
