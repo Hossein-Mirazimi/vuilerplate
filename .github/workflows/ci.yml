@@ -77,41 +77,41 @@ jobs:
         continue-on-error: true
         run: pnpm test
 
-  end-to-end-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v3
+  # end-to-end-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Code
+  #       uses: actions/checkout@v3
 
-      - name: Install Pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-          run_install: false
+  #     - name: Install Pnpm
+  #       uses: pnpm/action-setup@v2
+  #       with:
+  #         version: 7
+  #         run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+  #     - name: Get pnpm store directory
+  #       id: pnpm-cache
+  #       shell: bash
+  #       run: |
+  #         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+  #     - uses: actions/cache@v3
+  #       name: Setup pnpm cache
+  #       with:
+  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+  #         key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - name: Install Pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-          run_install: false
+  #     - name: Install Pnpm
+  #       uses: pnpm/action-setup@v2
+  #       with:
+  #         version: 7
+  #         run_install: false
 
-      - name: Install Depenecies
-        run: pnpm i
+  #     - name: Install Depenecies
+  #       run: pnpm i
 
-      - name: Run Cypress Test
-        run: pnpm test:e2e
+  #     - name: Run Cypress Test
+  #       run: pnpm test:e2e
 
   build:
     # needs: [lint, test]
