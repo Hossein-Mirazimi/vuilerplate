@@ -38,7 +38,7 @@ jobs:
         run: pnpm lint
 
   test:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -69,7 +69,7 @@ jobs:
         run: pnpm test
 
   end-to-end-test:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v3
